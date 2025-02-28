@@ -1,1 +1,1 @@
-git clone git@github.com:Xewar313/llvm.git
+git clone https://github.com/intel/llvm.git
