@@ -4,19 +4,17 @@ export BTYPE=Release
 
 . venv/urbench/bin/activate
 
-cmake -DCMAKE_BUILD_TYPE=$BTYPE \
-  -S$HOME/mkomar/KVM-utils/llvm/unified-runtime \
-  -B$HOME/mkomar/KVM-utils/llvm/unified-runtime/build_$BTYPE \
-  -DCMAKE_C_COMPILER=gcc \
-  -DCMAKE_CXX_COMPILER=g++ \
-  -DUR_DEVELOPER_MODE=ON \
-  -DUR_BUILD_TESTS=ON \
-  -DUR_CONFORMANCE_TEST_LOADER=OFF \
-  -DUR_BUILD_ADAPTER_L0=ON \
-  -DUR_BUILD_ADAPTER_L0_V2=ON \
-  -DUMF_DISABLE_HWLOC=OFF \
-  -DUR_FORMAT_CPP_STYLE=ON \
-  -DUR_DPCXX=$HOME/dpcpp_compiler/bin/clang++ \
-  -DUR_SYCL_LIBRARY_DIR=$HOME/dpcpp_compiler/lib
+cmake -B$HOME/mkomar/KVM-utils/llvm/llvm/build \
+ -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_BUILD_TYPE=Release \
+ -DUR_ENABLE_TRACING=ON \
+ -DUR_DEVELOPER_MODE=ON \
+ -DUR_BUILD_TESTS=ON \
+ -DUR_BUILD_ADAPTER_L0_V2=ON \
+ -DUR_CONFORMANCE_TEST_LOADER=OFF \
+ -DUR_STATIC_LOADER=OFF \
+ -DUR_STATIC_ADAPTER_L0_V2=OFF \
+ -DUR_DPCXX=$HOME/mkomar/KVM-utils/llvm/llvm/dpcpp_compiler/bin/clang++ \
+ -DUR_SYCL_LIBRARY_DIR=$HOME/mkomar/KVM-utils/llvm/llvm/dpcpp_compiler/lib \
+ -DCMAKE_INSTALL_PREFIX=$HOME/mkomar/KVM-utils/llvm/llvm/install \
  
-cmake --build $HOME/mkomar/KVM-utils/llvm/unified-runtime/build_$BTYPE -- -j
+cmake --build $HOME/mkomar/KVM-utils/llvm/llvm/build -- -j
